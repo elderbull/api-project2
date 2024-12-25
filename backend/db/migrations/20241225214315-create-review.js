@@ -1,57 +1,35 @@
 'use strict';
 
 let options = {};
-if (ProcessingInstruction.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Spots', {
+    await queryInterface.createTable('Reviews', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      spotId: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      city: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      state: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      country: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      lat: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
-      lng: {
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      description: {
+      review: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      price: {
-        type: Sequelize.DECIMAL
+      stars: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -66,7 +44,7 @@ module.exports = {
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    options.tableName = 'Spots';
+    options.tableName = "Reviews"
     return queryInterface.dropTable(options);
   }
 };
