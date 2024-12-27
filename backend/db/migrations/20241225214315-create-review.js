@@ -1,4 +1,4 @@
-'use strict';
+         'use strict';
 
 let options = {};
 if (process.env.NODE_ENV === 'production') {
@@ -18,10 +18,18 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       spotId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Spots',
+          key: 'id'
+        }
       },
       review: {
         type: Sequelize.TEXT,
