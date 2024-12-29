@@ -59,8 +59,16 @@ module.exports = {
         username: '9Fingers',
         hashedPassword: bcrypt.hashSync('password6')
       }
-    ], { validate: true });
+<<<<<<< HEAD
+    ], options, { validate: true });
+=======
 
+    ], { validate: true });
+<<<<<<< HEAD
+
+=======
+>>>>>>> dev
+>>>>>>> 90a434d ("trying to fix merge conflict")
   },
 
   async down (queryInterface, Sequelize) {
