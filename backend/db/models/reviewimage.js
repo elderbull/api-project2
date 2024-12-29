@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     reviewId: {
       type: DataTypes.INTEGER,
     },
-    imgUrl: {
+    url: {
       type: DataTypes.STRING,
       validate: {
         isUrl: true

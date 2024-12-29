@@ -23,7 +23,7 @@ module.exports = {
           key: 'id'
         }
       },
-      imgUrl: {
+      url: {
         type: Sequelize.STRING,
       },
       createdAt: {
