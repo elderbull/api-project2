@@ -15,6 +15,8 @@ module.exports = {
         firstName: 'Demo',
         lastName: 'User1',
         email: 'demo@user.io',
+        firstName: 'Demo',
+        lastName: 'User',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password')
       },
@@ -22,6 +24,8 @@ module.exports = {
         firstName: 'Demo',
         lastName: 'User2',
         email: 'user1@user.io',
+        firstName: 'User',
+        lastName: '1',
         username: 'FakeUser1',
         hashedPassword: bcrypt.hashSync('password2')
       },
@@ -29,6 +33,8 @@ module.exports = {
         firstName: 'Demo',
         lastName: 'User3',
         email: 'user2@user.io',
+        firstName: 'User',
+        lastName: '2',
         username: 'FakeUser2',
         hashedPassword: bcrypt.hashSync('password3')
       },
@@ -53,8 +59,8 @@ module.exports = {
         username: '9Fingers',
         hashedPassword: bcrypt.hashSync('password6')
       }
-
     ], { validate: true });
+
   },
 
   async down (queryInterface, Sequelize) {
