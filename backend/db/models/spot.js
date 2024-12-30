@@ -13,13 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.hasMany(
         models.Booking, {
-          foreignKey: 'spotId'
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+          hooks: true
         }
       );
 
       Spot.hasMany(
         models.Review, {
-          foreignKey: 'spotId'
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+          hooks: true
         }
       );
 
@@ -31,7 +35,9 @@ module.exports = (sequelize, DataTypes) => {
 
       Spot.hasMany(
         models.spotImage, {
-          foreignKey: 'spotId'
+          foreignKey: 'spotId',
+          onDelete: 'CASCADE',
+          hooks: true
         }
       );
 
