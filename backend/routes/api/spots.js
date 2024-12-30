@@ -14,7 +14,7 @@ const router = express.Router();
 
 //Get All Spots
 router.get('/', async (req, res, next) => {
-    const allSpots = await Spot.finAll({
+    const allSpots = await Spot.findAll({
         include: [
             {
                 model: Review
