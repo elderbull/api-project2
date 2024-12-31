@@ -17,7 +17,7 @@ const router = express.Router();
 router.get('/:spotId', async (req, res, next) => {
     const id = req.params.spotId
 
-    const spot = await Spot.findByPK({
+    const spot = await Spot.findByPk({
         where: {
             id: id
         },
