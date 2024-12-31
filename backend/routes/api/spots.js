@@ -44,7 +44,7 @@ router.get('/:spotId', async (req, res, next) => {
         where: {
             id: spot.ownerId
         },
-        attributs: {
+        attributes: {
             exclude: ['username']
         }
     });
