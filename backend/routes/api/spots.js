@@ -17,7 +17,10 @@ const router = express.Router();
 router.get('/:spotId', async (req, res, next) => {
     const id = req.params.spotId
 
-    const spot = await Spot.findByPk(id, {
+    const spot = await Spot.findOne({
+        where: {
+            id:id
+        },
         include: [
             {
                 model: spotImage,
