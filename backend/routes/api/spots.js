@@ -7,7 +7,6 @@ const { User, Spot, Review, Booking, reviewImage, spotImage } = require('../../d
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { requireAuth } = require('../../utils/auth')
 
 const { DataTypes, Op } = require('sequelize');
 
