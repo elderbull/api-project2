@@ -79,7 +79,7 @@ router.get('/:spotId', async (req, res, next) => {
         delete spotDup.Reviews;
     }
 
-    spotDup.spotImages = spotImages;
+    spotDup.SpotImages = spotImages;
     delete spotDup.spotImages
     spotDup.Owner = owner
     delete spotDup.User
