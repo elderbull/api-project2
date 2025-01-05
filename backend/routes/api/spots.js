@@ -135,9 +135,9 @@ router.get('/', async (req, res, next) => {
             },
             {
                 model: spotImage,
-                where: {
-                    preview: true
-                },
+                // where: {
+                //     preview: true
+                // },
                 attributes: {
                     exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
                 }
