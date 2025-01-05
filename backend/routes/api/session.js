@@ -3,8 +3,8 @@ const express = require('express');
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { User, Spot, Booking, Review, } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -21,6 +21,21 @@ const validateLogin = [
     .withMessage('Please provide a password.'),
   handleValidationErrors
 ];
+
+
+// GET all spots owned by the current user
+router.get("/spots", requireAuth, async (req, res, next) => {
+  try {
+    const currentUserId = req.user.id;
+    const spots = await Spot.findAll({
+      where: { ownerId: currentUserId },
+    });
+    const spotsInform = await spotsInfo(spots);
+    res.status(200).json({ Spots: spotsInform });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.get(
   '/',
