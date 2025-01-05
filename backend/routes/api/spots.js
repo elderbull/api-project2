@@ -134,7 +134,7 @@ router.get('/', async (req, res, next) => {
                 model: Review
             },
             {
-                model: SpotImage,
+                model: spotImage,
                 where: {
                     preview: true
                 },
@@ -166,8 +166,8 @@ router.get('/', async (req, res, next) => {
         }
 
 
-        spotCopy.previewImage = spot.SpotImages[0].url;
-        delete spotCopy.SpotImages;
+        spotCopy.previewImage = spot.spotImages[0].url;
+        delete spotCopy.spotImages;
 
         allSpotsCopy.push(spotCopy)
     })
