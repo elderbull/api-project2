@@ -11,31 +11,32 @@ const { Op } = require('sequelize');
 
 const router = express.Router();
 
+//Delete a Review Image
 //Delete a Spot Image
 router.delete("/:imageId", requireAuth, async (requireAuth, res, next) => {
-    const spotImageId = req.params.imageId;
+    const reviewImageId = req.params.imageId;
     const currUsr = req.user.id;
 
-    const imgToDelete = await spotImage.findByPk(spotImageId, {
+    const imgToDelete = await reviewImage.findByPk(reviewImageId, {
         include: {
-            model: Spot,
-            attributes: ['ownerId']
+            model: Review,
+            attributes: ['userId']
         }
     });
 
     if(!imgToDelete){
         return res.status(404).json({
-            message: "Spot Image couldn't be found"
+            message: "Review Image couldn't be found"
         })
     };
 
-    const spot = await Spot.findOne({
+    const review = await Review.findOne({
         where: {
-            id: imgToDelete.spotId
+            id: imgToDelete.reviewId
         }
     })
 
-    if(spot.ownerId !== currUsr){
+    if(review.userId !== currUsr){
         return res.status(403).json({
             message: "Forbidden"
         })
