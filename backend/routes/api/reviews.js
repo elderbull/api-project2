@@ -1,4 +1,4 @@
-//backend/routes/api/spots.js
+//backend/routes/api/reviews.js
 const express = require('express')
 const bcrypt = require('bcryptjs');
 
