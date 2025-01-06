@@ -4,6 +4,10 @@
 
 ![db-schema](./images/leon-bull-db-schema.png)
 
+## Render URL
+
+Render site: [https://api-project2-lqma.onrender.com/](https://api-project2-lqma.onrender.com/)
+
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
