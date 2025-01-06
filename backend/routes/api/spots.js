@@ -49,7 +49,7 @@ const validateSpot = [
     handleValidationErrors
   ];
 
-  //added validation for reviews
+  //Validation for reviews
 const validateReview = [
     check("review")
       .exists({ checkFalsy: true })
@@ -60,8 +60,58 @@ const validateReview = [
     handleValidationErrors,
   ];
 
+  //Validation for Bookings
+  const validateBooking = [
+    check('startDate')
+        .exists({ checkFalsy: true })
+        .isDate()
+        .isAfter()
+        .withMessage('startDate cannot be in the past'),
+    check('endDate')
+        .exists({ checkFalsy: true }),
+    check('startDate')
+        .custom((endDate, { req }) => (endDate >= req.body.startDate))
+        .withMessage("endDate cannot be on or before startDate"),
+    handleValidationErrors
+];
 
 
+//Get all Bookings for a Spot based on the Spot's id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+    const currOwner = req.user.id;
+    const spotId = req.params.spotId;
+    const getSpot = await Spot.findByPk(spotId);
+
+    if (!getSpot) {
+        return res.status(200).json({
+            message: "Spot couldn't be found"
+        })
+    };
+
+    const bookingsOwner = await Booking.findAll({
+        where: {
+            spotId: spotId
+        },
+        include: [{
+            model:User,
+            attributes: ['id', 'firstName', 'lastName']
+        }]
+    });
+
+    const bookingsNotOwner = await Booking.findAll({
+        where: {
+            spotId: spotId
+        },
+        attributes: ['spotId', 'startDate', 'endDate']
+    });
+
+    if (getSpot.ownerId !== currOwner){
+        return res.status(200).json({Bookings:bookingsNotOwner})
+    } else {
+        return res.status(200).json({Bookings:bookingsOwner})
+    };
+
+});
 
 //Get all reviews by a Spot's id
 router.get('/:spotId/reviews', async (req,res,next) => {
@@ -222,6 +272,74 @@ router.get('/', async (req, res, next) => {
     res.json({ "Spots": allSpotsCopy });
 
 } );
+
+//Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+    const spotId = req.params.spotId;
+    const { startDate, endDate } = req.body;
+    const userId = req.user.id;
+
+    const getSpot = await Spot.findByPk(spotId);
+
+    if (!getSpot) {
+        return res.status(404).json({
+            message: "Spot couldn't be found"
+        })
+    };
+
+    if (getSpot.ownerId === userId) {
+        return res.status(403).json({
+            message: "Forbidden"
+        })
+    };
+
+    //Booking conflict error
+
+    const checkBookings = await Booking.findAll({
+        where: {
+          spotId: getSpot.id,
+          [Op.or]: [
+            {
+              startDate: {
+                [Op.between]: [startDate, endDate],
+              },
+            },
+            {
+              endDate: {
+                [Op.between]: [startDate, endDate],
+              },
+            },
+            {
+              [Op.and]: [
+                { startDate: { [Op.lte]: startDate } },
+                { endDate: { [Op.gte]: endDate } },
+              ],
+            },
+          ],
+        },
+      });
+
+      if (checkBookings.length > 0) {
+        return res.status(403).json({
+          message: "Sorry, this spot is already booked for the specified dates",
+          errors: {
+            startDate: "Start date conflicts with an existing booking",
+            endDate: "End date conflicts with an existing booking",
+          },
+        });
+      };
+
+      const newBooking = await Booking.create({
+        spotId: spotId,
+        userId,
+        startDate,
+        endDate
+      });
+
+      return res.status(201).json(newBooking)
+});
+
 
 //Add an Image to a Spot based on the Spot's id
 router.post("/:spotId/images", requireAuth, async (req, res) => {

@@ -22,6 +22,46 @@ const validateLogin = [
   handleValidationErrors
 ];
 
+
+// Get all of the Current User's Bookings
+router.get('/current', requireAuth, async (req, res) => {
+
+  const bookings = await Booking.findAll({
+    where: {
+      userId: req.user.id
+    },
+    include: [
+      {
+        model: Spot,
+        attributes: {
+          exclude: ["description", "createdAt", "updatedAt"]
+        },
+        include: {
+          model: spotImage,
+          attributes: ['url'],
+          where: { preview: true }, required: false
+        },
+      }
+    ]
+  })
+
+  for (let i = 0; i < bookings.length; i++) {
+    const booking = bookings[i].toJSON();
+    if (booking.Spot) {
+      bookings[i] = booking;
+      if (booking.Spot.previewImage = booking.Spot.spotImages.length) {
+        booking.Spot.previewImage = booking.Spot.spotImages[0].url
+      } else {
+        booking.Spot.previewImage = null
+      }
+      delete booking.Spot.spotImages;
+    }
+  }
+
+  return res.status(200).json({ Bookings: bookings })
+});
+
+
 //Get all reviews owned by the current user
 router.get('/spots', async (req, res, next) => {
   const  currentUserId = req.user.id;
