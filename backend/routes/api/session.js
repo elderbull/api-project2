@@ -24,7 +24,7 @@ const validateLogin = [
 
 
 // Get all of the Current User's Bookings
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/bookings', requireAuth, async (req, res) => {
 
   const bookings = await Booking.findAll({
     where: {
@@ -63,12 +63,12 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 //Get all reviews owned by the current user
-router.get('/spots', async (req, res, next) => {
-  const  currentUserId = req.user.id;
+router.get('/reviews', requireAuth, async (req, res, next) => {
+  const  currUsr = req.user.id;
 
   const reviews = await Review.findAll({
     where: {
-        userId: req.user.id
+        userId: currUsr
     },
     include: [
         {
@@ -87,7 +87,7 @@ router.get('/spots', async (req, res, next) => {
             },
         },
         {
-            model: ReviewImage,
+            model: reviewImage,
             attributes: ['id', 'url']
         }
     ]
@@ -109,57 +109,58 @@ return res.status(200).json({ Reviews: reviews });
 } );
 
 // GET all spots owned by the current user
-router.get('/spots', async (req, res, next) => {
-  const  currentUserId = req.user.id;
+router.get('/spots', requireAuth, async (req, res, next) => {
+  const  currUsr = req.user.id;
 
-    const allSpots = await Spot.findAll({
-        where: {
-          ownerId:currentUserId
-        },
-        include: [
-            {
-                model: Review
-            },
-            {
-                model: spotImage,
-                // where: {
-                //     preview: true
-                // },
-                attributes: {
-                    exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
-                }
-            }
-        ]
-    });
+  const allSpots = await Spot.findAll({
+      where: {
+        ownerId:currUsr
+      },
+      include: [
+          {
+              model: Review
+          },
+          {
+              model: spotImage,
+              // where: {
+              //     preview: true
+              // },
+              attributes: {
+                  exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
+              }
+          }
+      ]
+  });
 
-    const allSpotsCopy = [];
+  const allSpotsCopy = [];
 
-    allSpots.forEach(spot => {
-        let starsArr = [];
-        let spotCopy = spot.toJSON();
+  allSpots.forEach(spot => {
+      let starsArr = [];
+      let spotCopy = spot.toJSON();
 
-        for (let review of spot.Reviews) {
-            starsArr.push(review.stars);
-        }
+      for (let review of spot.Reviews) {
+          starsArr.push(review.stars);
+      }
 
-        if (starsArr.length) {
-            const sumStars = starsArr.reduce((acc, curr) => acc + curr,);
+      if (starsArr.length) {
+          const sumStars = starsArr.reduce((acc, curr) => acc + curr,);
 
-            spotCopy.avgRating = sumStars / spot.Reviews.length;
-            delete spotCopy.Reviews;
-        } else {
-            spotCopy.avgRating = null;
-            delete spotCopy.Reviews;
-        }
+          spotCopy.avgRating = sumStars / spot.Reviews.length;
+          delete spotCopy.Reviews;
+      } else {
+          spotCopy.avgRating = null;
+          delete spotCopy.Reviews;
+      }
 
 
-        spotCopy.previewImage = spot.spotImages[0].url;
-        delete spotCopy.spotImages;
+      spotCopy.previewImage = spot.spotImages[0].url;
+      delete spotCopy.spotImages;
 
-        allSpotsCopy.push(spotCopy)
-    })
+      allSpotsCopy.push(spotCopy)
+  })
 
-    res.json({ "Spots": allSpotsCopy });
+  res.json({ "Spots": allSpotsCopy });
+
 
 } );
 
