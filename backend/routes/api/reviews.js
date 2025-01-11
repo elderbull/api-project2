@@ -24,43 +24,63 @@ const validateReviews = [
     handleValidationErrors
   ];
 
+  //get one review - Test to pull review
+  router.get('/single/:reviewId', async (req, res) => {
+    const reviewId = req.params.reviewId;
+    const review = await Review.findByPk(reviewId);
+    return res.status(201).json(review)
+  })
+
+
 //Add an Image to a Review based on the Review's Id
 router.post("/:reviewId/images", requireAuth, async (req, res) => {
-	const { currUserId } = req.user.id;
-    const { reviewId } = req.params.reviewId;
-	const { url } = req.body;
+    const reviewId = req.params.reviewId;
+    const { url } = req.body;
+    const currUsr = req.user.id;
 
-    const review = await Review.findByPk(reviewId);
+
+    const review = await Review.findOne({
+        where: {
+            id: reviewId
+        }
+    });
 
     if (!review) {
-		return res.status(404).json({
-			message: "Review couldn't be found",
-		});
-	}
+        res.status(404);
+        return res.json({
+            "message": "Review couldn't be found"
+          })
+    }
 
-	if (parseInt(currUserId) !== review.userId) {
-    return res.status(403).json({ message: "Forbidden" });
-  }
+    if (currUsr !== review.userId) {
+            return res.status(403).json({ message: "Forbidden" });
+          }
 
-	const existingImages = await reviewImage.count({ where: { reviewId } });
-	if (existingImages >= 10) {
-		return res.status(403).json({
-			message: "Maximum number of images for this resource was reached",
 
-		});
-	}
+    const imgCount = await reviewImage.findAll({
+        where: {
+            reviewId: reviewId
+        }
+    })
 
-    const newImage = await reviewImage.create({
-		reviewId,
-		url,
-	}, {
-		include: [{ model: Review }],
-		attributes: ['id', 'url']
-	});
-	return res.status(201).json({
-		id: newImage.id,
-		url: newImage.url,
-	});
+    // Checking the number of images for this review
+    if (imgCount.length >= 10) {
+        res.status(403);
+        return res.json({
+            "message": "Maximum number of images for this resource was reached"
+          })
+    }
+
+    const newReviewImage = await reviewImage.create({ reviewId, url })
+
+    const imgToAdd = newReviewImage.toJSON();
+
+    delete imgToAdd.reviewId;
+    delete imgToAdd.updatedAt;
+    delete imgToAdd.createdAt;
+
+    res.status(201);
+    return res.json(imgToAdd)
 });
 
 //Edit a review
@@ -105,7 +125,7 @@ router.delete('/:reviewId', requireAuth, async (req,res,next) => {
         })
     };
 
-    if (pareInt(currUserId) === review.userId) {
+    if (currUserId === review.userId) {
         await review.destroy();
         return res.status(200).json({
             message: "Successfully deleted"
