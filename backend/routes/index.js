@@ -11,6 +11,11 @@ router.use('/api', apiRouter)
   res.send('Hello World!');
 }); */
 
+//Redirect route to /api - Remove once front end is added
+router.get("/", (req, res) => {
+  res.status(302).redirect('/api')
+})
+
 // Add a XSRF-TOKEN cookie
 router.get("/api/csrf/restore", (req, res) => {
     const csrfToken = req.csrfToken();
