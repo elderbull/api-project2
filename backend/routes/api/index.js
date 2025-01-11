@@ -24,6 +24,11 @@ router.use('/bookings', bookingsRouter);
 router.use('/spotImages', spotImagesRouter);
 router.use('/reviewImages', reviewImagesRouter);
 
+
+router.get("/", async(req, res) => {
+  res.status(200).json({message:"Welcome to Leon Bull's Mod 4 Project"})
+})
+
 //Test route
 router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });
