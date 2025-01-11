@@ -23,7 +23,7 @@ const validateLogin = [
 ];
 
 //Get all reviews owned by the current user
-router.get('/spots', async (req, res, next) => {
+router.get('/reviews', async (req, res, next) => {
   const  currentUserId = req.user.id;
 
   const reviews = await Review.findAll({
@@ -47,7 +47,7 @@ router.get('/spots', async (req, res, next) => {
             },
         },
         {
-            model: ReviewImage,
+            model: reviewImage,
             attributes: ['id', 'url']
         }
     ]

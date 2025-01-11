@@ -20,7 +20,7 @@ router.use('/reviews', reviewsRouter);
 
 
 router.get("/", async(req, res) => {
-  res.json({requestBoy: req.body})
+  res.status(200).json({message:"Welcome to Leon Bull's Mod 4 Project"})
 })
 
 //Test route

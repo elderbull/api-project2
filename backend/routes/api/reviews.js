@@ -67,7 +67,7 @@ router.post("/:reviewId/images", requireAuth, async (req, res) => {
 router.put('/:reviewId', requireAuth, validateReviews, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const { review, stars} = req.body;
-    const { currentUserId } = req.user.id;
+    const currentUserId = req.user.id;
 
     const currReview = await Review.findByPk(reviewId);
 
@@ -77,13 +77,13 @@ router.put('/:reviewId', requireAuth, validateReviews, async (req, res, next) =>
         })
     };
 
-    if (currReview.userId !== parseInt(currentUserId)){
+    if (Number(currReview.userId) !== Number(currentUserId)){
         return res.status(403).json({
             message: "Forbidden"
         })
     };
 
-    const updatedReview = await currReview.updated({
+    const updatedReview = await currReview.update({
         review,
         stars
     });
