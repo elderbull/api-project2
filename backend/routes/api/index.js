@@ -18,6 +18,11 @@ router.use('/users', usersRouter);
 router.use('/spots', spotsRouter);
 router.use('/reviews', reviewsRouter);
 
+
+router.get("/", async(req, res) => {
+  res.json({requestBoy: req.body})
+})
+
 //Test route
 router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });
