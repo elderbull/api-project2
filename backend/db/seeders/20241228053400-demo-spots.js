@@ -47,8 +47,7 @@ module.exports = {
         name: 'The Island Loft ',
         description: 'Nestled in the heart of Sandy Bay, the condo is spread over two floors with 3 bedrooms and 2 bathrooms, full kitchen and living area not to mention the spacious outdoor deck. Ceiling fans and split AC units ensure a cool and comfortable environment for you or your guests.',
         price: 250
-      },
-
+      }
     ], {validate: true});
   },
 
