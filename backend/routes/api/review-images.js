@@ -11,18 +11,19 @@ const { Op } = require('sequelize');
 
 const router = express.Router();
 
+
 //Delete a Review Image
-//Delete a Spot Image
-router.delete("/:imageId", requireAuth, async (requireAuth, res, next) => {
+router.delete("/:imageId", requireAuth, async (req, res, next) => {
     const reviewImageId = req.params.imageId;
     const currUsr = req.user.id;
 
-    const imgToDelete = await reviewImage.findByPk(reviewImageId, {
+    const imgToDelete = await reviewImage.findByPk(reviewImageId,{
         include: {
             model: Review,
-            attributes: ['userId']
+            attributes: ["userId"]
         }
     });
+
 
     if(!imgToDelete){
         return res.status(404).json({
@@ -30,22 +31,16 @@ router.delete("/:imageId", requireAuth, async (requireAuth, res, next) => {
         })
     };
 
-    const review = await Review.findOne({
-        where: {
-            id: imgToDelete.reviewId
-        }
-    })
-
-    if(review.userId !== currUsr){
+       if(imgToDelete.Review.userId === currUsr){
+        await imgToDelete.destroy();
+        return res.status(200).json({
+            message: "Successfully deleted"
+         });
+    } else {
         return res.status(403).json({
             message: "Forbidden"
-        })
-    };
-
-    await imgToDelete.destroy();
-    return res.status(200).json({
-        message: "Successfully deleted"
-    });
+        });
+    }
 });
 
 module.exports = router;
