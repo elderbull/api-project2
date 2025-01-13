@@ -78,7 +78,7 @@ const validateReview = [
 
 //Get all Bookings for a Spot based on the Spot's id
 router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
-    const currOwner = req.user.id;
+    const currUsr = req.user.id;
     const spotId = req.params.spotId;
     const getSpot = await Spot.findByPk(spotId);
 
@@ -105,7 +105,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
         attributes: ['spotId', 'startDate', 'endDate']
     });
 
-    if (getSpot.ownerId !== currOwner){
+    if (getSpot.ownerId !== currUsr){
         return res.status(200).json({Bookings:bookingsNotOwner})
     } else {
         return res.status(200).json({Bookings:bookingsOwner})
