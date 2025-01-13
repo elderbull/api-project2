@@ -136,7 +136,7 @@ router.delete("/:bookingId", requireAuth, async (req, res, next) => {
                  });
         }
     } else {
-        return res.json({ message: 'You are not authorized to delete this booking' })
+        return res.status(403).json({ message: 'Forbidden' })
     };
 });
 
