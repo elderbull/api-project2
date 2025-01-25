@@ -26,7 +26,11 @@ router.use('/review-images', reviewImagesRouter);
 
 
 router.get("/", async(req, res) => {
-  res.status(200).json({message:"Welcome to Leon Bull's Mod 4 Project"})
+  res.status(200).json({
+    welcome:"Welcome to Leon Bull's Mod 4 Project",
+    program:"AppAcademy",
+    instructor: "Marlon Santos"
+  })
 })
 
 //Test route
