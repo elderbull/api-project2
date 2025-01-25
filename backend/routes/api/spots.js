@@ -225,51 +225,118 @@ router.get('/:spotId', async (req, res, next) => {
 
 //Get All Spots
 router.get('/', async (req, res, next) => {
+
+    //Get query params
+    const {
+      page = 1, //page default if nothing is passed in
+      size = 20, //page default if nothing is passed in
+      minLat,
+      maxLat,
+      minLng,
+      maxLng,
+      minPrice,
+      maxPrice
+    } = req.query
+
+    //Query parameters validation
+    const errors = {};
+    if (page < 1) errors.page = "Page must be greater than or equal to 1";
+    if (size < 1 || size > 20) errors.size = "Size must be between 1 and 20";
+    if (minLat && (isNaN(minLat) || minLat < -90 || minLat > 90)) {
+      errors.minLat = "Minimum latitude is invalid";
+    }
+    if (maxLat && (isNaN(maxLat) || maxLat < -90 || maxLat > 90)) {
+      errors.maxLat = "Maximum latitude is invalid";
+    }
+    if (minLng && (isNaN(minLng) || minLng < -180 || minLng > 180)) {
+      errors.minLng = "Minimum longitude is invalid";
+    }
+    if (maxLng && (isNaN(maxLng) || maxLng < -180 || maxLng > 180)) {
+      errors.maxLng = "Maximum longitude is invalid";
+    }
+    if (minPrice && (isNaN(minPrice) || minPrice < 0)) {
+      errors.minPrice = "Minimum price must be greater than or equal to 0";
+    }
+    if (maxPrice && (isNaN(maxPrice) || maxPrice < 0)) {
+      errors.maxPrice = "Maximum price must be greater than or equal to 0";
+    }
+
+    if (Object.keys(errors).length) {
+      return res.status(400).json({
+        message: "Bad Request",
+        errors,
+      });
+    }
+
+    //Query filters
+    const where = {} //empty object to hold query filter
+    if (minLat) where.lat = { [Op.gte]: minLat };
+    if (maxLat) where.lat = { ...where.lat, [Op.lte]: maxLat };
+    if (minLng) where.lng = { [Op.gte]: minLng };
+    if (maxLng) where.lng = { ...where.lng, [Op.lte]: maxLng };
+    if (minPrice) where.price = { [Op.gte]: minPrice };
+    if (maxPrice) where.price = { ...where.price, [Op.lte]: maxPrice };
+
+    //limit to maximum 20
+    const limit = Math.min(size, 20)
+    const offset = (page - 1) * limit
+
+
     const allSpots = await Spot.findAll({
+        where,
         include: [
             {
-                model: Review
+              model: Review,
+              attributes: ['stars'],
+              required: false
             },
             {
-                model: spotImage,
-                // where: {
-                //     preview: true
-                // },
-                attributes: {
-                    exclude: ['id', 'spotId', 'preview', 'createdAt', 'updatedAt']
-                }
+              model: spotImage,
+              attributes: ['url', 'preview'],
+              required: false
             }
-        ]
+        ],
+        limit,
+        offset
     });
 
-    const allSpotsCopy = [];
+    const allSpotsCopy = allSpots.map(spot => {
+      const spotJSON = spot.toJSON();
 
-    allSpots.forEach(spot => {
-        let starsArr = [];
-        let spotCopy = spot.toJSON();
+      // Calculate avgRating
+      const reviews = spotJSON.Reviews || [];
+      const avgRating = reviews.length
+        ? reviews.reduce((sum, review) => sum + review.stars, 0) / reviews.length
+        : null;
 
-        for (let review of spot.Reviews) {
-            starsArr.push(review.stars);
-        }
+      // Get previewImage
+      const previewImage = spotJSON.SpotImages?.find(img => img.previewImage)?.url || null;
 
-        if (starsArr.length) {
-            const sumStars = starsArr.reduce((acc, curr) => acc + curr,);
+      // Return formatted spot object
+      return {
+        id: spotJSON.id,
+        ownerId: spotJSON.ownerId,
+        address: spotJSON.address,
+        city: spotJSON.city,
+        state: spotJSON.state,
+        country: spotJSON.country,
+        lat: spotJSON.lat,
+        lng: spotJSON.lng,
+        name: spotJSON.name,
+        description: spotJSON.description,
+        price: spotJSON.price,
+        createdAt: spotJSON.createdAt,
+        updatedAt: spotJSON.updatedAt,
+        avgRating: avgRating ? parseFloat(avgRating.toFixed(1)) : null,
+        previewImage,
+      };
+    });
 
-            spotCopy.avgRating = sumStars / spot.Reviews.length;
-            delete spotCopy.Reviews;
-        } else {
-            spotCopy.avgRating = null;
-            delete spotCopy.Reviews;
-        }
-
-
-        spotCopy.previewImage = spot.spotImages[0].url;
-        delete spotCopy.spotImages;
-
-        allSpotsCopy.push(spotCopy)
-    })
-
-    res.json({ "Spots": allSpotsCopy });
+    res.json({
+      Spots: allSpotsCopy,
+      page: parseInt(page, 10),
+      size: parseInt(size, 10),
+    });
 
 } );
 
