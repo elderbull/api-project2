@@ -207,6 +207,9 @@ router.post(
         return next(err);
       }
 
+      if(!user) return res.status(400).json({message: "Bad Request", credential: "Email or username is required"})
+      else if(!password) return res.status(400).json({message: "Bad Request", password: "Password is required"})
+
       const safeUser = {
         id: user.id,
         firstName: user.firstName,
@@ -217,7 +220,7 @@ router.post(
 
       await setTokenCookie(res, safeUser);
 
-      return res.json({
+      return res.status(200).json({
         user: safeUser
       });
     }
