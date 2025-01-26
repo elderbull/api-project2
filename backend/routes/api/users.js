@@ -14,15 +14,23 @@ const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
-      .withMessage('Please provide a valid email.'),
+      .withMessage('Invalid email.'),
     check('username')
       .exists({ checkFalsy: true })
       .isLength({ min: 4 })
-      .withMessage('Please provide a username with at least 4 characters.'),
+      .withMessage('Username is required'),
     check('username')
       .not()
       .isEmail()
       .withMessage('Username cannot be an email.'),
+    check('firstName')
+      .exists({ checkFalsy: true})
+      .notEmpty()
+      .withMessage('First Name is required'),
+    check('lastName')
+      .exists({ checkFalsy: true})
+      .notEmpty()
+      .withMessage('Last Name is required'),
     check('password')
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
@@ -39,6 +47,24 @@ router.post(
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({ firstName, lastName, email, username, hashedPassword });
 
+      const usrExist = await User.findOne({
+        where: {
+          username: username,
+        }
+      })
+
+      const emailExist = await User.findOne({
+        where: {
+          email: email
+        }
+      })
+
+      if (usrExist) {
+        return res.status(500).json({message:"User already exits", username: "User with that username already exists"})
+      } else if(emailExist) {
+        return res.status(500).json({message:"User already exits", email: "User with that email already exists"})
+      }
+
       const safeUser = {
         id: user.id,
         firstName: user.firstName,
@@ -49,7 +75,7 @@ router.post(
 
       await setTokenCookie(res, safeUser);
 
-      return res.json({
+      return res.status(201).json({
         user: safeUser
       });
     }
