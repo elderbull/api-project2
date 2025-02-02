@@ -77,9 +77,10 @@ router.get('/reviews', requireAuth, async (req, res, next) => {
         },
         {
             model: Spot,
-            attributes: {
+            attributes: ['id', 'name', 'city', 'state', 'country', 'price']
+            /* {
                 exclude: ["description", "createdAt", "updatedAt"]
-            },
+            } */,
             include: {
                 model: spotImage,
                 attributes: ['url'],
