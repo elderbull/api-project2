@@ -3,6 +3,7 @@ import * as sessionActions from '../../store/session'
 import {useDispatch, useSelector} from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import './SignupForm.css';
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 
 
 
@@ -16,9 +17,16 @@ const SignupFormPage = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState("");
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setConfirmShowPassword] = useState(false)
 
     //Check to see if user if login? routes to "/" home : routes to SignUp page
     if (sessionUser) return <Navigate to="/" replace={true} />;
+
+    //Toggles visibility of password
+    const togglePasswordVisibility = (setCommand, command ) => {
+        setCommand(!command);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -89,26 +97,36 @@ const SignupFormPage = () => {
             />
           </label>
           {errors.lastName && <p>{errors.lastName}</p>}
-          <label>
-            Password
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-          {errors.password && <p>{errors.password}</p>}
-          <label>
-            Confirm Password
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </label>
+          <div className='password-container'>
+            <label>
+                Password
+                <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                />
+                <div onClick={() => showPassword(togglePasswordVisibility(setShowPassword, showPassword))}>
+                {showPassword ? <AiFillEye/> :<AiFillEyeInvisible/>}
+                </div>
+            </label>
+                {errors.password && <p>{errors.password}</p>}
+         </div>
+         <div className='password-container'>
+            <label>
+                Confirm Password
+                <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                />
+                <div onClick={() => showConfirmPassword(togglePasswordVisibility(setConfirmShowPassword,showConfirmPassword))}>
+                {showConfirmPassword ? <AiFillEye/> :<AiFillEyeInvisible/>}
+            </div>
+            </label>
           {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+          </div>
           <button type="submit">Sign Up</button>
         </form>
       </>

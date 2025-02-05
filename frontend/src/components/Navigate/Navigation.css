@@ -1,0 +1,54 @@
+.profile-dropdown{
+    background-color: white;
+    list-style: none;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    position: absolute;
+    top:8%;
+    right: 2%;
+    width: 150px;
+}
+
+.hidden {
+    display: none
+}
+
+.profile-menu-item{
+    padding: 5px;
+    font-size: small;
+}
+
+#menu-bttn {
+    border-radius:10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5px 5px 5px;
+    font-size: large;
+    border: 1.5px solid rgb(179, 178, 178);
+    background-color: white;
+}
+
+#log-out-button{
+    border-radius: 50px;
+    display: flex;
+    padding: 10px 10px 10px 10px;
+    border: 1.5px solid black;
+    color: white;
+    background-color: rgb(94, 94, 94);
+}
+
+#profile-logo{
+    padding-left: 5px;
+    color: rgb(86, 86, 86)
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1.5px solid rgb(179, 178, 178);
+    padding: 10px 20px 20px 10px;
+    list-style: none;
+}
