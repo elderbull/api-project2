@@ -15,16 +15,17 @@
     right: 0;
     left: 0;
     bottom: 0;
-    /* background-color: rgba(0, 0, 0, 0.7); */
-    background-image: url(https://www.hobbitontours.com/media/b3chms2c/hobbiton-movie-set-7.jpg?width=640&height=360&v=1db0041fa2da050);
-    opacity: 0.4;
-    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.7);
+
   }
 
   #modal-content {
     border-radius: 50px;
     position: absolute;
     background-color: white;
-    width: 300px;
-    height: 200px;
-  }
+    width: 500px;
+    height: 350px;
+    background-image: url(https://www.hobbitontours.com/media/b3chms2c/hobbiton-movie-set-7.jpg?width=640&height=360&v=1db0041fa2da050);
+    /*opacity: 0.4;*/
+    background-size: cover;
+}
