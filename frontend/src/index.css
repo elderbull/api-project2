@@ -6,3 +6,10 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
+
+.input-error {
+    color:red;
+    font-weight: lighter;
+    font-style: italic;
+    background-color: antiquewhite;
+}
