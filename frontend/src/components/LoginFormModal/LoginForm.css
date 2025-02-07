@@ -1,18 +1,9 @@
-.login-box {
+/* #login-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:space-around;
-
 }
-
-/* h1 {
-    font-size: x-large;
-    color: firebrick;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
 
 .login-form {
     width: 100%;
@@ -33,7 +24,7 @@ label {
 .form-input {
     margin-top: 5px;
     margin-bottom: 5px;
-    /* padding: 3px; */
+    /* padding: 3px;
     width: 100%;
     font-size: small;
     display: flex;
@@ -52,4 +43,48 @@ label {
     margin-top: 10px;
     box-shadow: 3px 3px black;
     border-radius: 100px
+} */
+#login-box h1 {
+    font-style: italic;
 }
+
+#login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.login-form {
+    margin-top: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px
+}
+
+.form-input {
+    width: 35%;
+    padding: px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: small;
+    cursor: pointer;
+}
+
+#login-bttn {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#login-bttn:hover {
+    background-color: #0056b3;
+  }

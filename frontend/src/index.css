@@ -9,7 +9,10 @@ h1 {
 
 .input-error {
     color:red;
-    font-weight: lighter;
-    font-style: italic;
-    background-color: antiquewhite;
+    font-weight: bold;
+    /* font-style: italic; */
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+    width: 98.5%;
 }
