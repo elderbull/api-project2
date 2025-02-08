@@ -30,25 +30,47 @@
     background-color: white;
 }
 
-#log-out-button{
+#logout-bttn{
     border-radius: 50px;
     display: flex;
-    padding: 10px 10px 10px 10px;
+    padding: 5px 5px 5px 5px;
     border: 1.5px solid black;
     color: white;
     background-color: rgb(94, 94, 94);
 }
 
-#profile-logo{
-    padding-left: 5px;
-    color: rgb(86, 86, 86)
+#logo{
+    padding-left: xlarge;
+    /* color: rgb(86, 86, 86) */
+    color:rgb(0,38,127);;
 }
 
-nav {
+#home-bttn {
+    text-decoration: none;
+    font-size: x-large;
+    font-weight: 600;
+    /* color: rgb(238, 66, 86); */
+    padding-left: 5px;
+    background: -webkit-linear-gradient(firebrick, #FFC726);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar-profile-bttn {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1.5px solid rgb(179, 178, 178);
     padding: 10px 20px 20px 10px;
     list-style: none;
+}
+
+#profile-logo {
+    
 }

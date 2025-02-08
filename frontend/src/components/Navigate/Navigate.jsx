@@ -5,6 +5,8 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import './Navigation.css'
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import { GiIsland } from "react-icons/gi";
+import ProfileButtonLoggedOut from './ProfileButtonLogOut';
 
 
 function Navigation({ isLoaded }) {
@@ -19,35 +21,23 @@ function Navigation({ isLoaded }) {
   const sessionLinks = sessionUser ? (
     <>
       <li>
-        <ProfileButton user={sessionUser} />
+        <ProfileButton user={sessionUser} className="navbar-profile-bttn" />
       </li>
     </>
   ) : (
     <>
-      <li>
-        <OpenModalButton
-            buttonText="Log In"
-            modalComponent={<LoginFormModal />}
-        />
-      </li>
-      <li>
-      <OpenModalButton
-            buttonText="Sign Up"
-            modalComponent={<SignupFormModal />}
-        />
-      </li>
+      <ProfileButtonLoggedOut />
     </>
   );
 
   return (
-    <nav>
-        <ul>
-            <li>
-                <NavLink to="/">Home</NavLink>
+      <ul className="nav">
+            <li className='home-box'>
+              <GiIsland id='profile-logo'/>
+                <NavLink to="/" id='home-bttn'>Jewel of the West Indies</NavLink>
             </li>
             {isLoaded && sessionLinks}
-        </ul>
-    </nav>
+      </ul>
   );
 }
 

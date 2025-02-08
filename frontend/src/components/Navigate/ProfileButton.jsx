@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ImMenu } from "react-icons/im";
 import { FaUserCircle } from 'react-icons/fa';
@@ -47,7 +48,7 @@ function ProfileButton({ user }) {
         <li className='profile-menu-item'>{user.firstName} {user.lastName}</li>
         <li className='profile-menu-item'>{user.email}</li>
         <li>
-          <button onClick={logout}>Log Out</button>
+          <button onClick={logout} id="logout-bttn">Log Out</button>
         </li>
       </ul>
     </>
