@@ -33,8 +33,9 @@ function Navigation({ isLoaded }) {
   return (
       <ul className="nav">
             <li className='home-box'>
-              <GiIsland id='profile-logo'/>
-                <NavLink to="/" id='home-bttn'>Jewel of the West Indies</NavLink>
+              <NavLink to="/" id='home-bttn'>
+              <img src="/favicon-32x32.png" id='profile-logo' />
+              Jewels of the West Indies</NavLink>
             </li>
             {isLoaded && sessionLinks}
       </ul>

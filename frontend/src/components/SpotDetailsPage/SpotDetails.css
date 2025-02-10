@@ -1,0 +1,76 @@
+#spot-box {
+    margin: 0px 40px 40px 40px;
+    max-width: 1000px;
+}
+#spot-header > h3 {
+    font-weight: lighter;
+}
+
+#spot-images-bx {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#main-image {
+    width: 100%;
+}
+
+#main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#smaller-imgs {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+}
+
+.spot-imgs {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#spot-info-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.discrip-box {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.price-review-box {
+    border: 2px solid black;
+     border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+     height: 125px;
+     margin: 18px 0px 0px 30px;
+}
+
+.price-details {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* .small-font {
+    font-variant: small-caps;
+} */
+#reserve-button{
+    margin: 0px 20px 0px 20px;
+    height: 40px;
+    background-color: rgb(255, 63, 86);
+    color: white;
+    box-shadow: 3px 3px black;
+  }
