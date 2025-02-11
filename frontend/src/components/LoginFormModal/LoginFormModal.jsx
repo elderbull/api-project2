@@ -24,6 +24,16 @@ function LoginFormModal() {
       });
   };
 
+  const demoUserLogin = async (e) => {
+    e.preventDefault();
+    const userInfo = {
+      credential: "Demo-lition",
+      password: "password"
+    };
+    return dispatch(sessionActions.login(userInfo))
+      .then(closeModal)
+  }
+
   return (
     <div id="login-box">
       <h1>Log In</h1>
@@ -54,6 +64,8 @@ function LoginFormModal() {
         )}
         <button type="submit" id='login-bttn'>Log In</button>
       </form>
+      {/*Demo user button: Demo-lition*/}
+      <button onClick={demoUserLogin} id="demo-usr-bttn">Demo User</button>
     </div>
   );
 }

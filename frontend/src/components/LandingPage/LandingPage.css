@@ -1,0 +1,33 @@
+#all-spots-box {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+};
+
+.single-spot-box {
+    display: flex;
+    flex-direction: column;
+    direction:ltr;
+    width: 300px;
+    margin: 10px;
+}
+
+.single-spot-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+     border-radius: 10px;
+}
+
+.single-spot-info-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+}
+
+.single-spot-link {
+    text-decoration: none;
+    color: black;
+}

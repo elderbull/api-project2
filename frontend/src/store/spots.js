@@ -10,56 +10,56 @@ const LOAD_DETAILS = 'spot/load_details';
 const LOAD_REVIEWS = 'spot/load_reviews'
 
 //regular action creator
-export const loadSpots = (spots) => {
+const loadSpots = (spots) => {
   return {
     type: LOAD_SPOTS,
     spots
   };
 };
 
-export const loadCrntUsrSpots = (spots) => {
+const loadCrntUsrSpots = (spots) => {
   return {
     type: LOAD_CURRENT_USER_SPOTS,
     spots
   };
 };
 
-export const addSpot = (spot) => {
+const addSpot = (spot) => {
   return {
     type: ADD_SPOT,
     spot
   };
 };
 
-export const editSpot = (spot) => {
+const editSpot = (spot) => {
   return {
     type: EDIT_SPOT,
     spot
   };
 };
 
-export const removeSpot = (spotId) => {
+const removeSpot = (spotId) => {
   return {
     type: REMOVE_SPOT,
     spotId
   };
 };
 
-export const addImage = (image) => {
+const addImage = (image) => {
   return {
     type: ADD_IMAGE,
     image
   };
 };
 
-export const loadDetails = (spotId) => {
+const loadDetails = (spotId) => {
   return {
     type: LOAD_DETAILS,
     spotId
   };
 };
 
-export const loadReviews = (spotId) => {
+const loadReviews = (spotId) => {
   return {
     type: LOAD_REVIEWS,
     spotId
@@ -167,7 +167,7 @@ const initialState = {};
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SPOTS:{
-            const newState = {...state, Spots: action.spots };
+            const newState = {...state,...action.spots};
             return newState
         }
         case LOAD_CURRENT_USER_SPOTS: {

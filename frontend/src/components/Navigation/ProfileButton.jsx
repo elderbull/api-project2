@@ -44,8 +44,8 @@ function ProfileButton({ user }) {
         <FaUserCircle id='profile-logo'/>
       </button>
       <ul className={ulClassName} ref={ulRef}>
-        <li className='profile-menu-item'>{user.username}</li>
-        <li className='profile-menu-item'>{user.firstName} {user.lastName}</li>
+        {/* <li className='profile-menu-item'>{user.username}</li> */}
+        <li className='profile-menu-item'>Hello, {user.firstName}</li>
         <li className='profile-menu-item'>{user.email}</li>
         <li>
           <button onClick={logout} id="logout-bttn">Log Out</button>
