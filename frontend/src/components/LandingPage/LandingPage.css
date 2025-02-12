@@ -6,6 +6,50 @@
     align-items: center;
 };
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px solid black;
+
+}
+
+.tooltip .tooltip-content {
+    visibility: hidden;
+    width: 120px;
+    background-color: darkslategray;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 0;
+
+
+    position: absolute;
+    z-index: 1;
+    top: 30%;
+    margin-left: 7%;
+
+    opacity: 0;
+    transition: background-color, opacity .5s;
+}
+
+.tooltip .tooltip-content::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    background-color:blue
+}
+
 .single-spot-box {
     display: flex;
     flex-direction: column;
@@ -30,4 +74,8 @@
 .single-spot-link {
     text-decoration: none;
     color: black;
+}
+
+.single-spot-price {
+    font-weight: bold;
 }

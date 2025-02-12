@@ -22,19 +22,23 @@ const LandingPage = () => {
         <h1> Find Your Perfect Getaway</h1>
         <div id='all-spots-box'>
         {allSpots?.map((spot) => (
-          <div key={spot.id} className="single-spot-box">
+          <div key={spot.id} className="single-spot-box tooltip">
             <NavLink to={`/spots/${spot.id}`} className="single-spot-link">
+            <div className="tooltip-content">
+              {spot.name}
+            </div>
             <img src="https://placehold.co/600x400" alt={`${spot.name} image`} className="single-spot-img"/>
             <div className="single-spot-info-box">
               <div>
               {spot.city}, {spot.state}
               </div>
               <div>
-              <ReviewAvgCount />
+              {/* <ReviewAvgCount /> */}
+              <MdStarRate />{spot?.avgRating ? spot?.avgRating.toFixed(2) : spot.avgRating}
             </div>
 
             </div>
-
+            <div className="single-spot-price">${spot.price.toFixed(2)} night</div>
 
             </NavLink>
           </div>

@@ -27,12 +27,12 @@ const ReviewAvgCount = () => {
     return (
         <>
         {
-            spotDetails.Reviews.length ? (
-                spotDetails.Reviews.length > 1 ? (
-                    <div><MdStarRate />{spotDetails.avgRating ? spotDetails.avgRating : spotDetails.avgRating} <LuDot /> {spotDetails.numReviews} reviews</div>
+            spotDetails?.Reviews?.length ? (
+                spotDetails?.Reviews?.length > 1 ? (
+                    <div><MdStarRate />{spotDetails?.avgRating ? spotDetails?.avgRating : spotDetails.avgRating} <LuDot /> {spotDetails.numReviews} reviews</div>
 
                 ) : (
-                    <div><MdStarRate />{spotDetails.avgRating ? spotDetails.avgRating.toFixed(2) : spotDetails.avgRating} <LuDot /> {spotDetails.numReviews} review</div>
+                    <div><MdStarRate />{spotDetails?.avgRating ? spotDetails?.avgRating.toFixed(2) : spotDetails.avgRating} <LuDot /> {spotDetails.numReviews} review</div>
                 )
 
             ) : (
