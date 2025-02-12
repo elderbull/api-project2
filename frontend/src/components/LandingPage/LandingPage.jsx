@@ -34,7 +34,7 @@ const LandingPage = () => {
               </div>
               <div>
               {/* <ReviewAvgCount /> */}
-              <MdStarRate />{spot?.avgRating ? spot?.avgRating.toFixed(2) : spot.avgRating}
+              <MdStarRate /> {spot?.avgRating ? spot?.avgRating.toFixed(2) : "New"}
             </div>
 
             </div>
