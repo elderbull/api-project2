@@ -11,19 +11,17 @@ import ProfileButtonLoggedOut from './ProfileButtonLogOut';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
-//   const dispatch = useDispatch();
-
-//   const logout = (e) => {
-//     e.preventDefault();
-//     dispatch(sessionActions.logoutUser());
-//   };
 
   const sessionLinks = sessionUser ? (
-    <>
+    <ul className="navbar-menu-bttn">
       <li>
-        <ProfileButton user={sessionUser} className="navbar-profile-bttn" />
+        <NavLink to='/spots/new' id="createspot-link">Create a New Spot</NavLink>
       </li>
-    </>
+
+      <li>
+        <ProfileButton user={sessionUser} />
+      </li>
+    </ul>
   ) : (
     <>
       <ProfileButtonLoggedOut />

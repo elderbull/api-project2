@@ -1,7 +1,8 @@
 .profile-dropdown{
-    background-color: white;
+    background-color: #ffc726;
+    border-radius: 10px;
     list-style: none;
-    border: 2px solid black;
+    border: 6px hidden black;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -16,23 +17,37 @@
 }
 
 .profile-menu-item{
-    padding: 5px;
-    font-size: small;
+    padding: 10px;
+    font-size: medium;
+}
+
+.navbar-menu-bttn {
+    list-style: none;
+    display: flex;
+    align-items: center;
 }
 
 #menu-bttn {
+    width: 60px;
     border-radius:10px;
     display: flex;
     justify-content: space-between;
-    padding: 5px 5px 5px 5px;
+    padding: 10px 5px 10px 5px;
     font-size: large;
     border: 1.5px solid rgb(179, 178, 178);
     background-color: white;
 }
 
+.profile-bttn-log {
+    border: none;
+    background-color: white;
+
+}
+
 #logout-bttn{
     border-radius: 50px;
     display: flex;
+
     padding: 5px 5px 5px 5px;
     border: 1.5px solid black;
     color: white;
@@ -56,11 +71,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-.navbar-profile-bttn {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
+
 
 .nav {
     display: flex;
@@ -72,5 +83,11 @@
 }
 
 #profile-logo {
-    
+
+}
+
+#createspot-link{
+    text-decoration: none;
+    color: rgb(15, 105, 84);
+    padding-right: 10px;
 }
