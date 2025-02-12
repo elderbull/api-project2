@@ -162,13 +162,17 @@ export const getReviewsBySpotId = (spotId) => async (dispatch) => {
 
 /* -------------end of thunk actions--------------------- */
 
+
+
 const initialState = {};
 
 const spotReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_SPOTS:{
-            const newState = {...state,...action.spots};
+            const newState = {...state, ...action.spots};
+            action.spots.Spots.forEach((spot) => newState[spot.id]=spot)
             return newState
+
         }
         case LOAD_CURRENT_USER_SPOTS: {
             const newState = {...state, Spots: action.spots}
