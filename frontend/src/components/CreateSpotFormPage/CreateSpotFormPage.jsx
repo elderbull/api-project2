@@ -30,6 +30,22 @@ function CreateSpotFormPage() {
         if (sessionUser) {
             setErrors({});
         }
+
+        setAddress("")
+        setCountry("")
+        setCity("")
+        setState("")
+        setState("")
+        setLat("")
+        setLng("")
+        setDescription("")
+        setName("")
+        setPrice("")
+        setPreviewImgUrl("")
+        setImg1Url("")
+        setImg2Url("")
+        setImg3Url("")
+        setImg4Url("")
     }
 
     const newSpot = {
@@ -101,25 +117,28 @@ function CreateSpotFormPage() {
                         onChange={(e) => setAddress(e.target.value)}
                     />
                     {errors.address && <p className='input-error'>{errors.address}</p>}
+                   <div className='city-state'>
                     <input
-                        placeholder='City'
-                        className='form-input'
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                    />
-                    {errors.city && <p className='input-error'>{errors.city}</p>},
-                    <input
-                        placeholder='State'
-                        className='form-input'
-                        type="text"
-                        value={state}
-                        onChange={(e) => setState(e.target.value)}
-                    />
-                    {errors.state && <p className='input-error'>{errors.state}</p>}
+                            placeholder='City'
+                            className='form-input city-input'
+                            type="text"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                        />
+                        {errors.city && <p className='input-error'>{errors.city}</p>},
+                        <input
+                            placeholder='State'
+                            className='form-input state-input'
+                            type="text"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                        />
+                        {errors.state && <p className='input-error'>{errors.state}</p>}
+                   </div>
+                    <div className='lat-lng'>
                     <input
                         placeholder='Latitude'
-                        className='form-input'
+                        className='form-input lat-input'
                         type="text"
                         value={lat}
                         onChange={(e) => setLat(e.target.value)}
@@ -133,6 +152,7 @@ function CreateSpotFormPage() {
                         onChange={(e) => setLng(e.target.value)}
                     />
                     {errors.lng && <p className='input-error'>{errors.lng}</p>}
+                    </div>
                 </div>
                 <div className='new-spot-section'>
                     <h2 className='spotform-heading'>Describe your place to guests</h2>
@@ -179,6 +199,7 @@ function CreateSpotFormPage() {
                     type='url'
                     value={previewImgUrl}
                     onChange={(e) => setPreviewImgUrl(e.target.value)}
+                    required
                  />
                 <input
                     placeholder='Image URL'
@@ -215,8 +236,6 @@ function CreateSpotFormPage() {
                         Create Spot
                     </button>
                 </div>
-
-
 
 
             </form>
