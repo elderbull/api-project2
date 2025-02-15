@@ -34,7 +34,7 @@ function ProfileButtonLoggedOut() {
     <>
       <button onClick={toggleMenu} id='menu-bttn'>
         <IoIosMenu />
-        {/* <FaUserCircle id='profile-logo'/> */}
+        <FaUserCircle id='profile-logo'/>
       </button>
       <div className={ulClassName} ref={ulRef}>
       <li className='profile-menu-item'>

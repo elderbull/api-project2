@@ -45,7 +45,7 @@
 }
 
 .tooltip:hover .tooltip-content {
-    visibility: visible;
+    visibility: hidden;
     opacity: 1;
     background-color:blue
 }

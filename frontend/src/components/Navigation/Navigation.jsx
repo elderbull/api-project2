@@ -1,12 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { useSelector} from 'react-redux';
 import ProfileButton from './ProfileButton';
-import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../LoginFormModal';
-import './Navigation.css'
-import SignupFormModal from '../SignupFormModal/SignupFormModal';
-import { GiIsland } from "react-icons/gi";
 import ProfileButtonLoggedOut from './ProfileButtonLogOut';
+import './Navigation.css'
 
 
 function Navigation({ isLoaded }) {

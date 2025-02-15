@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ImMenu } from "react-icons/im";
 import { FaUserCircle } from 'react-icons/fa';
@@ -46,8 +46,9 @@ function ProfileButton({ user }) {
       <ul className={ulClassName} ref={ulRef}>
         {/* <li className='profile-menu-item'>{user.username}</li> */}
         <li className='profile-menu-item'>Hello, {user.firstName}</li>
-        <li className='profile-menu-item'>{user.email}</li>
-        <li>
+        <li className='profile-menu-item usr-email'>{user.email}</li>
+        <NavLink to={`/spots/current`} className='profile-menu-item manage-spots-box'>Manage Spots</NavLink>
+        <li className='profile-menu item logout-box'>
           <button onClick={logout} id="logout-bttn">Log Out</button>
         </li>
       </ul>

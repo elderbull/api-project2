@@ -55,7 +55,8 @@ p.spotform-caption {
     font-weight: bold;
 }
 
-.input-error {
-    background-color: black;
+.input-error-create {
+    color:red;
+    font-size: x-small;
 
 }

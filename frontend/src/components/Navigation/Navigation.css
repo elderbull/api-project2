@@ -1,15 +1,15 @@
 .profile-dropdown{
-    background-color: #ffc726;
-    border-radius: 10px;
+    background-color: white;
+    /* border-radius: 10px; */
     list-style: none;
-    border: 6px hidden black;
+    border: 4px solid black;
     display: flex;
     flex-direction: column;
     padding: 5px;
     position: absolute;
     top:8%;
     right: 2%;
-    width: 150px;
+    width: 200px;
 }
 
 .hidden {
@@ -17,7 +17,7 @@
 }
 
 .profile-menu-item{
-    padding: 10px;
+    padding: 5px;
     font-size: medium;
 }
 
@@ -44,12 +44,16 @@
 
 }
 
+.logout-box {
+    align-self: center;
+}
+
 #logout-bttn{
     border-radius: 50px;
     display: flex;
-
-    padding: 5px 5px 5px 5px;
-    border: 1.5px solid black;
+    margin-top: 5px;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid black;
     color: white;
     background-color: rgb(94, 94, 94);
 }
@@ -82,8 +86,13 @@
     list-style: none;
 }
 
-#profile-logo {
+.manage-spots-box, .usr-email {
+    border-bottom: 2px solid black;
+}
 
+.manage-spots-box {
+    text-decoration: none;
+    color: black;
 }
 
 #createspot-link{

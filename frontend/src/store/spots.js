@@ -75,11 +75,14 @@ export const getSpots = () => async (dispatch) => {
     return //don't know if I need to return
 }
 
-export const getCurrentUserSpots = () => async (dispatch) => {
-    const response = await csrfFetch('/api/session/current');
-    const spots = await response.json()
-    dispatch(loadCrntUsrSpots(spots))
-    return // don't know if return is needed after dispatch
+export const getCurrtUsrSpots = () => async (dispatch) => {
+    const response = await csrfFetch('/api/session/spots');
+
+    if (response.ok) {
+      const data = await response.json()
+      dispatch(loadCrntUsrSpots(data.Spots))
+      return data // don't know if return is needed after dispatch
+    }
 }
 
 export const createSpot = (spot) => async (dispatch) => {
@@ -121,16 +124,16 @@ export const deleteSpot = (spotId) => async (dispatch) => {
 
     if (response.ok) {
         dispatch(removeSpot(spotId))
-        dispatch(getCurrentUserSpots())
+        dispatch(getCurrUsrSpots())
         return //dont know if return is needed after dispatch
     }
 };
 
-export const addSpotImage = (image) => async (dispatch) => {
-    const { spotId, url, preview } = image;
+export const addSpotImage = (spotId, imgUrl, preview) => async (dispatch) => {
+    // const { spotId, url, preview } = image;
     const response = await csrfFetch(`/api/spots/${spotId}/images`, {
         method: 'POST',
-        body: JSON.stringify({url, preview})
+        body: JSON.stringify({url:imgUrl, preview})
     });
 
     if (response.ok) {

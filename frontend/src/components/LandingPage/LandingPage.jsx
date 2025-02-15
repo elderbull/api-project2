@@ -27,7 +27,7 @@ const LandingPage = () => {
             <div className="tooltip-content">
               {spot.name}
             </div>
-            <img src="https://placehold.co/600x400" alt={`${spot.name} image`} className="single-spot-img"/>
+            <img src={spot.previewImage} alt={`${spot.name} image`} className="single-spot-img"/>
             <div className="single-spot-info-box">
               <div>
               {spot.city}, {spot.state}
