@@ -14,13 +14,13 @@ module.exports = {
    await spotImage.bulkCreate([
     {
       spotId: 1,
-      url: 'https://www.pexels.com/photo/door-of-a-hobbit-hole-24414786/',
+      url: 'https://images.pexels.com/photos/24414786/pexels-photo-24414786/free-photo-of-door-of-a-hobbit-hole.jpeg',
       preview: true
     },
     {
       spotId: 2,
       url: 'https://images4.alphacoders.com/842/842661.jpg',
-      preview: false
+      preview: true
     },
     {
       spotId: 3,

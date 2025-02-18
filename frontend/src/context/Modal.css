@@ -1,0 +1,31 @@
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+
+  }
+
+  #modal-content {
+    border-radius:5px;
+    position: absolute;
+    background-color: white;
+    width: 400px;
+    /* height: 280px; */
+    /* background-image: url(https://www.hobbitontours.com/media/b3chms2c/hobbiton-movie-set-7.jpg?width=640&height=360&v=1db0041fa2da050); */
+    /*opacity: 0.4;*/
+    background-size: cover;
+}

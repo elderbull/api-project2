@@ -292,8 +292,9 @@ router.get('/', async (req, res, next) => {
             },
             {
               model: spotImage,
-              attributes: ['url', 'preview'],
-              required: false
+              where: {
+                preview: true
+              }
             }
         ],
         limit,
@@ -302,7 +303,7 @@ router.get('/', async (req, res, next) => {
 
     const allSpotsCopy = allSpots.map(spot => {
       const spotJSON = spot.toJSON();
-
+      console.log(spotJSON)
       // Calculate avgRating
       const reviews = spotJSON.Reviews || [];
       const avgRating = reviews.length
@@ -310,7 +311,7 @@ router.get('/', async (req, res, next) => {
         : null;
 
       // Get previewImage
-      const previewImage = spotJSON.SpotImages?.find(img => img.previewImage)?.url || null;
+      const previewImage = spotJSON.spotImages[0].url || null;
 
       // Return formatted spot object
       return {

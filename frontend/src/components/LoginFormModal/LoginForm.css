@@ -1,0 +1,64 @@
+
+#login-box > h1 {
+    font-style: italic;
+}
+
+#login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.login-form {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px
+}
+
+.login-form > input {
+    width: 100%;
+    border: 1px solid black;
+    font-size: small;
+    cursor: pointer;
+}
+
+#login-bttn {
+    padding: 10px;
+    background-color: white;
+    color: grey;
+    font-weight: bold;
+    border: 2px solid grey;
+    border-radius: 2px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    box-shadow: 3px 5px grey;
+}
+
+.hidden {
+    display: none
+}
+
+#login-bttn:hover {
+    background-color: #0056b3;
+  }
+
+#demo-usr-bttn {
+    width: 30%;
+    font-weight: bold;
+    border: none;
+    border-radius: 10%;
+    background-color: aqua;
+    font-size: medium;
+    color: darkslategray;
+    margin-top: 30px;
+    padding: 10px;
+    cursor:pointer;
+    margin-bottom: 15px;
+}

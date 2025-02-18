@@ -1,0 +1,62 @@
+.create-spot-box {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 33%;
+}
+.spotform-heading {
+    font-size: medium;
+    margin-bottom: 0;
+}
+p.spotform-caption {
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.form-input {
+    width: 100%;
+    border-radius: 0;
+    border: 1px solid black;
+    /* padding: 1px; */
+    background-color: #E8F0FE;
+    margin: 5px;
+}
+
+
+.new-spot-section {
+    width: 100%;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+
+}
+
+.city-state, .lat-lng {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.create-spot-bttn-bx {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#newspot-submit-bttn {
+    padding: 10px;
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+    box-shadow: 3px 3px black;
+    font-weight: bold;
+}
+
+.input-error-create {
+    color:red;
+    font-size: x-small;
+
+}

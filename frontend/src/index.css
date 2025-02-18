@@ -1,0 +1,18 @@
+/* TODO: Add sitewide styles */
+h1 {
+    font-size: x-large;
+    color: firebrick;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-error {
+    color:red;
+    font-weight: bold;
+    /* font-style: italic; */
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+    width: 98.5%;
+}

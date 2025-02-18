@@ -1,0 +1,55 @@
+.dm-box {
+    margin: 15px;
+}
+
+.dm-header > h1 {
+    color: black;
+    margin-top: 5px;
+}
+
+.md-content {
+    font-size: 14px;
+}
+
+.md-bttn-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.md-yes-bttn, .md-no-bttn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.md-yes-bttn-confirm, .md-no-bttn-confirm {
+    color:white;
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    border-radius: 2px;
+    font-size: 16px;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+}
+
+.md-yes-bttn-confirm {
+    background-color: orangered;
+}
+
+.md-yes-bttn-confirm:hover {
+    background-color: #e0484d;
+}
+
+.md-no-bttn-confirm {
+    background-color: grey;
+}
+
+.md-no-bttn-confirm:hover {
+    background-color: rgb(105,102,102);
+}

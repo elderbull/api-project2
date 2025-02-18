@@ -1,0 +1,34 @@
+.review-formbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    justify-content: space-around;
+    padding: 0px 15px 15px 15px;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+.review-input{
+    width: 280px;
+}
+
+.review-text-box, .stars-box, .review-bttn-box{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.review-submit-bttn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 80%;
+    background-color: rgb(255, 63, 86);
+    color: white;
+    box-shadow: 3px 3px black;
+}
