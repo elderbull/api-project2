@@ -15,7 +15,7 @@ function EditSpotFormPage() {
 
   useEffect(() => {
     dispatch(getSpotById(spotId))
-  },[dispatch])
+  },[dispatch, spotId])
 
   const [address, setAddress] = useState(currSpot?.address);
   const [city, setCity] = useState(currSpot?.city);
@@ -28,6 +28,19 @@ function EditSpotFormPage() {
   const [price, setPrice] = useState(currSpot?.price);
   const [errors, setErrors] = useState({})
 
+  useEffect(() => {
+    if (currSpot) {
+        setName(currSpot.name || '');
+        setAddress(currSpot.address || '');
+        setCity(currSpot.city || '');
+        setState(currSpot.state || '');
+        setCountry(currSpot.country || '');
+        setLat(currSpot.lat || '');
+        setLng(currSpot.lng || '');
+        setDescription(currSpot.description || '');
+        setPrice(currSpot.price || '');
+    }
+  }, [currSpot]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -35,17 +48,31 @@ function EditSpotFormPage() {
       setErrors({});
 
       const editedSpot = {
-       id:{ country, address, city, state, lng, lat, name, description, price}
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
       }
-    }
 
-    dispatch(
-      updateSpot(currSpot.id, editedSpot)
-        .then(spot => {
+      dispatch(
+        updateSpot(currSpot.id, editedSpot)
+        ).then(spot => {
           navigate(`/spots/${spot.id}`)
-        })
-    )
-  }
+      })
+
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data?.errors) {
+            setErrors(data.errors);
+          }
+        });
+    }
+  };
 
 
   return (

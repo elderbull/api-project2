@@ -31,7 +31,7 @@ const addSpot = (spot) => {
   };
 };
 
-const editSpot = (spotId) => {
+const editSpot = (spot) => {
   return {
     type: EDIT_SPOT,
     spot
@@ -102,19 +102,21 @@ export const createSpot = (spot) => async (dispatch) => {
     }
 };
 
-export const updateSpot = (spotId, spotData) => async (dispatch) => {
+export const updateSpot = (spotId, spot) => async (dispatch) => {
 
     const response = await csrfFetch(`/api/spots/${spotId}`, { //use str literal for spotId
         method: 'PUT',
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(spotData)
+        body: JSON.stringify(spot)
     })
 
-       const updatedData = await response.json();
-        dispatch(editSpot(updatedData))
+       if (response.ok) {
+        const updatedData = await response.json();
+        dispatch(editSpot(updatedData.spot))
         return updatedData;
+       }
 
 };
 
