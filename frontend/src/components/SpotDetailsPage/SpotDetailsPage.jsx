@@ -6,6 +6,7 @@ import OpenModalButton from '../OpenModalButton';
 
 import './SpotDetails.css'
 import ReviewAvgCount from "../ReviewAvgCount/ReviewAvgCount";
+import CreateReviewFormModal from "../CreateReviewFormModal/CreateReviewFormModal";
 
 const SpotDetailsPage = () => {
 
@@ -30,6 +31,12 @@ const SpotDetailsPage = () => {
     const prevImg = () => {
         const img = spotDetails.SpotImages.find(image => image.preview === true)
         return img
+    }
+
+    const formatDate=(dateStr)=> {
+        const date = new Date(dateStr);
+        const formattedDate = date.toLocaleDateString('en-us', {year: 'numeric', month: 'long'});
+        return formattedDate
     }
 
     return (
@@ -75,24 +82,41 @@ const SpotDetailsPage = () => {
                 <hr/>
                 <div id="reviews-box">
                     <ReviewAvgCount />
-                    <div className='reviews-list'>
-                        {
+                    <div className="post-review-box">
+
+                    {
                             currUser && spotDetails.ownerId !== currUser.id &&
-                            !(spotDetails.Reviews.find(review => review.userId === currUser.id)) && !spotDetails.Reviews.length ? (
+                            !(spotDetails?.Reviews?.find(review => review.userId === currUser.id)) && !spotDetails.Reviews.length ? (
                                 <div>
                                     <OpenModalButton
-                                        buttonText="Post Your Review" buttonClassName="review-bttn"
-                                        // modalComponent={}
+                                        buttonText="Post Your Review"
+                                        buttonClassName="review-bttn"
+                                        modalComponent={<CreateReviewFormModal />}
                                     />
                                 </div>
 
                             ) : (
-                                <>
-                                <h1>test</h1>
+                                <div>
 
-                                </>
+
+                                </div>
                             )
                         }
+                    </div>
+                    <div className='reviews-list'>
+                        {spotDetails?.Reviews?.map(review => (
+                            <div key={review.id} className="single-review">
+                                <div className="reviewer-name">
+                                    {review.User.firstName}
+                                </div>
+                                <div className="review-date">
+                                    {formatDate(review.createdAt)}
+                                </div>
+                                <div className="review-item">
+                                    {review.review}
+                                </div>
+                            </div>
+                        ))}
 
 
 

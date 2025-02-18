@@ -2,18 +2,25 @@ import { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
+
+
 import './LoginForm.css';
 
 function LoginFormModal() {
   const dispatch = useDispatch();
+
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
+
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors({});
+
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(async (res) => {
@@ -21,7 +28,8 @@ function LoginFormModal() {
         if (data && data.errors) {
           setErrors(data.errors);
         }
-      });
+      })
+
   };
 
   const demoUserLogin = async (e) => {
@@ -30,8 +38,9 @@ function LoginFormModal() {
       credential: "Demo-lition",
       password: "password"
     };
-    return dispatch(sessionActions.login(userInfo))
-      .then(closeModal)
+    // navigate('/spots/current')
+    return await dispatch(sessionActions.login(userInfo))
+          .then(closeModal)
   }
 
   return (
@@ -41,7 +50,7 @@ function LoginFormModal() {
 
 
           <input
-            className='form-input'
+            className='form-input-login'
             placeholder='Username or Email'
             type="text"
             value={credential}
@@ -60,7 +69,7 @@ function LoginFormModal() {
           />
 
         {errors.credential && (
-          <p className='input-error'>{errors.credential}</p>
+          <p>{errors.credential}</p>
         )}
         <button type="submit" id='login-bttn'>Log In</button>
       </form>

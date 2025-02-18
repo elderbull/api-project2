@@ -64,13 +64,31 @@
     justify-content: space-around;
 }
 
-/* .small-font {
-    font-variant: small-caps;
-} */
 #reserve-button{
     margin: 0px 20px 0px 20px;
     height: 40px;
     background-color: rgb(255, 63, 86);
     color: white;
     box-shadow: 3px 3px black;
+  }
+
+  /********** review listing css **********/
+
+  .reviews-list{
+    margin-top: 15px;
+  }
+
+  .single-review {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px
+  }
+
+  .reviewer-name, .review-item{
+    font-weight: bold;
+  }
+
+  .review-date {
+    font-size: small;
   }

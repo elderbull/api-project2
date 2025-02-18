@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { getCurrtUsrSpots } from "../../store/spots";
+import { getCurrtUsrSpots, getSpotById } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { MdStarRate } from "react-icons/md";
 import './ManageSpots.css'
@@ -12,56 +12,73 @@ import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 const ManageSpotsPage = () => {
 
     const dispatch = useDispatch();
+    // const sessionUser = useSelector((state) => state?.session?.user)
+    const usrSpots = useSelector(state => state.spot.Spots)
     const navigate = useNavigate();
-    const currUsrSpots = useSelector(state => state.spot.Spots)
+    // const spotList = Object.values(usrSpots)
+
+    // if(!sessionUser) return <h1>Unauthorized Access</h1>;
 
     useEffect(() => {
         dispatch(getCurrtUsrSpots());
     }, [dispatch])
 
-    const handleClick = async (e) => {
-        e.preventDefaut();
-        return navigate('/spots/new')
+    const newSpotRoute = () => {
+        navigate(`/spots/new`)
     }
 
-    const updateSpot = (spotId) => {
+    const updateSpot = async (spotId) => {
+        dispatch(getSpotById(spotId))
         navigate(`/spots/${spotId}/edit`)
     }
 
     return (
-        <div id="manage-spots-box">
-            <div className="ms-header">
-                <h1 id="ms-title">Manage Spots</h1>
-                <button onClick={handleClick} className='ns-bttn'>Create a New Spot</button>
+        <>
+        <div className="ms-header">
+              <h1 id="ms-title">Manage Your Spots</h1>
+              <button onClick={newSpotRoute} className='ms-bttn'>Create a New Spot</button>
             </div>
-            <div className="currUser-spots-box">
-                {currUsrSpots?.map(({id,previewImage,name,city,state,avgRating,price}) =>(
-                    <div key={id} className='spot-box'>
-                        <NavLink to={`/spots/${id}`}>
-                            <img src={previewImage} alt='spot-prev-img' className="spot-prev-img" />
-                            <div className="spot-info">
-                                <div>{city}, {state}</div>
-                                <div><MdStarRate />{avgRating ? avgRating.toFixed(2) : avgRating}</div>
-                                <div className="ms-price">${price}</div>
-                            </div>
-                        </NavLink>
-                        <div className="edit-del-bttn-box">
-                            <div className="update-bttn-box">
-                                <button className="update-bttn" type="button" onClick={()=> updateSpot(id)}>Update Spot</button>
-                            </div>
-                            <div className="del-box">
-                                <OpenModalButton
-                                    buttonText="Delete"
-                                    modalComponent={<DeleteSpotModal spotId={id} /> }
-                                />
-                            </div>
-
-                        </div>
-
-                    </div>
-                ))}
+            <div id='all-spots-box'>
+        {usrSpots?.map((spot) => (
+          <div key={spot.id} className="single-spot-box tooltip">
+            <NavLink to={`/spots/${spot.id}`} className="single-spot-link">
+            <div className="tooltip-content">
+              {spot.name}
             </div>
-        </div>
+            <img src={spot.previewImage} alt={`${spot.name} image`} className="single-spot-img"/>
+            <div className="single-spot-info-box">
+              <div>
+              {spot.city}, {spot.state}
+              </div>
+              <div>
+              {/* <ReviewAvgCount /> */}
+              <MdStarRate /> {spot?.avgRating ? spot?.avgRating.toFixed(2) : "New"}
+            </div>
+
+            </div>
+            <div className="single-spot-price">${spot.price.toFixed(2)} night</div>
+            </NavLink>
+            <div className="edit-del-bttn-box">
+                <div className="edit-box">
+                    <button name={spot.id}className="ms-edit-bttn" type="button" onClick={()=>updateSpot(spot.id)}>Update</button>
+                </div>
+                <div className="del-box">
+                    <OpenModalButton
+                        buttonText="Delete"
+                        modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                    />
+                </div>
+            </div>
+          </div>
+
+
+
+        ))}
+
+       </div>
+
+
+       </>
     )
 }
 

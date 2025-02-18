@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { getSpots } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
 import { MdStarRate } from "react-icons/md";
-import ReviewAvgCount from "../ReviewAvgCount/ReviewAvgCount";
+
 import './LandingPage.css'
 
 const LandingPage = () => {

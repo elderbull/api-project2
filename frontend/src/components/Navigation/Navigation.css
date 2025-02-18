@@ -10,6 +10,7 @@
     top:8%;
     right: 2%;
     width: 200px;
+    cursor: pointer;
 }
 
 .hidden {
@@ -36,6 +37,11 @@
     font-size: large;
     border: 1.5px solid rgb(179, 178, 178);
     background-color: white;
+
+}
+
+#menu-bttn, button {
+    cursor: pointer;
 }
 
 .profile-bttn-log {
@@ -56,6 +62,7 @@
     border: 1px solid black;
     color: white;
     background-color: rgb(94, 94, 94);
+    cursor: pointer;
 }
 
 #logo{

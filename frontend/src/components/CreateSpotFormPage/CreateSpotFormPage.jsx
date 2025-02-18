@@ -36,8 +36,8 @@ function CreateSpotFormPage() {
         if (!address) formErrs.address = "Street address is required.";
         if (!city) formErrs.city = "City is required.";
         if (!state) formErrs.state = "State is required.";
-        // if (!lat || isNaN(lat)) formErrs.lat = "Latitude must be a number.";
-        // if (!lng || isNaN(lng)) formErrs.lng = "Longitude must be a number.";
+        if (!lat || isNaN(lat)) formErrs.lat = "Latitude must be a number.";
+        if (!lng || isNaN(lng)) formErrs.lng = "Longitude must be a number.";
         if (!description || description.length < 30) formErrs.description = "Description must be at least 30 characters.";
         if (!name) formErrs.name = "Spot name is required.";
         if (!price || price <= 0) formErrs.price = "Price must be a positive number.";
@@ -62,6 +62,7 @@ function CreateSpotFormPage() {
 
 
         const newSpot = {address, city, state, country,lat,lng,name,description,price};
+        if (!valForm()) return;
 
         const response = await dispatch(createSpot(newSpot));
         if (response) {

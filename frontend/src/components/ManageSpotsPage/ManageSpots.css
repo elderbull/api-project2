@@ -1,9 +1,17 @@
-#manage-spots-box{
-    margin: 25px;
+/* #manage-spots-box{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+} */
+
+#all-spots-box {
+    margin-left: 15px;
 }
 
 .ms-header{
-    margin-left: 5px;
+    margin-left: 20px;
 }
 
 .ms-header > h1 {
@@ -12,4 +20,40 @@
     display: flex;
     flex-direction: column;
     align-items: normal;
+    margin-bottom: 2px;
+}
+
+.ms-bttn {
+    background-color: grey;
+    color: white;
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 14px;
+    width: 155px;
+    height: auto;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+}
+
+.single-spot-info-box {
+    margin-top: 5px;
+}
+
+.single-spot-price {
+    margin-top: 5px;
+}
+
+.edit-del-bttn-box {
+    display: flex;
+}
+
+.edit-del-bttn-box button {
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: grey;
+    color: white;
+    box-shadow: 2px 2px black;
+    cursor: pointer;
+    
 }

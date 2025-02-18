@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, /* useState */ } from "react";
 import { useParams } from 'react-router-dom';
 import { getSpotById, getReviewsBySpotId } from "../../store/spots";
 import { useDispatch, useSelector } from "react-redux";
-import OpenModalButton from '../OpenModalButton';
 import { MdOutlineStarRate, MdStarRate } from "react-icons/md";
 import { LuDot } from "react-icons/lu";
 
@@ -10,17 +9,17 @@ import { LuDot } from "react-icons/lu";
 const ReviewAvgCount = () => {
 
     const dispatch = useDispatch();
-    const [isLoading, setisLoading] = useState(false);
+    // const [isLoading, setisLoading] = useState(false);
     const { spotId } = useParams();
     const spotDetails = useSelector(state => state.spot);
-    const currUser = useSelector((state) => state.session.user);
+    // const currUser = useSelector((state) => state.session.user);
     const review = useSelector((state) => state.review)
 
 
     useEffect(() => {
         dispatch(getSpotById(spotId))
             .then(dispatch(getReviewsBySpotId(spotId)))
-            .then(() => { setisLoading(true)})
+            // .then(() => { setisLoading(true)})
     }, [dispatch, spotId, review])
 
 

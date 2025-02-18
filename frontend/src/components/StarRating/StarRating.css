@@ -1,0 +1,22 @@
+/* StarRating.css */
+.star-rating {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .star {
+    font-size: 30px;
+    color:  grey;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .star.filled {
+    color: gold;
+  }
+
+  .rating-value {
+    margin-left: 10px;
+    font-size: 16px;
+    color: black;
+  }

@@ -2,8 +2,8 @@
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+    /* justify-content: space-around; */
+
 };
 
 .tooltip {
