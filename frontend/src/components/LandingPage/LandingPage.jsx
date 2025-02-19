@@ -9,9 +9,10 @@ import './LandingPage.css'
 const LandingPage = () => {
     const dispatch = useDispatch();
     const allSpots = useSelector(state => state?.spot?.Spots)
-    console.log(allSpots)
+
 
     const fixedPrice = (price) => {
+      price = Number(price);
       return price.toFixed(2);
     }
 
