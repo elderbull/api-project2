@@ -11,6 +11,10 @@ const LandingPage = () => {
     const allSpots = useSelector(state => state?.spot?.Spots)
     console.log(allSpots)
 
+    const fixedPrice = (price) => {
+      return price.toFixed(2);
+    }
+
 
     useEffect(() => {
       dispatch(getSpots());
@@ -38,7 +42,7 @@ const LandingPage = () => {
             </div>
 
             </div>
-            <div className="single-spot-price">${spot.price.toFixed(2)} night</div>
+            <div className="single-spot-price">${fixedPrice(spot.price)} night</div>
 
             </NavLink>
           </div>
