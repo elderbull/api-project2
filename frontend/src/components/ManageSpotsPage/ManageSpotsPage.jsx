@@ -56,7 +56,7 @@ const ManageSpotsPage = () => {
             </div>
 
             </div>
-            <div className="single-spot-price">${spot.price.toFixed(2)} night</div>
+            <div className="single-spot-price">${Number(spot.price).toFixed(2)} night</div>
             </NavLink>
             <div className="edit-del-bttn-box">
                 <div className="edit-box">
